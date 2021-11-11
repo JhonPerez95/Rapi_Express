@@ -3,6 +3,9 @@ package modelo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 /**
  *
@@ -39,6 +42,20 @@ public class Conexion {
 
     public void desconectar() {
         conn = null;
-    } 
-  
+    }
+    
+    
+    /*
+        Metodo que devuelve datos encontrados por la consulta
+    */
+    public ResultSet consultarRegistros(String strSentenciaSQL){
+        try {
+            PreparedStatement pstm = conn.prepareStatement(strSentenciaSQL);
+            ResultSet respuesta = pstm.executeQuery();
+            return respuesta;
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    }
 }
