@@ -16,7 +16,7 @@ public class Conexion {
     String driver = "com.mysql.cj.jdbc.Driver";
     String user = "root";
     String pass = "root12345";
-    String nameDb = "prueba";
+    String nameDb = "bdcaferapiexpress";
     String url = "jdbc:mysql://localhost:3306/" + nameDb + "?useUnicode=true&use"
             + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
             + "serverTimezone=UTC";
@@ -41,14 +41,14 @@ public class Conexion {
     }
 
     public void desconectar() {
+        System.out.println("Se desconecto de la base de datos");
         conn = null;
     }
-    
-    
+
     /*
         Metodo que devuelve datos encontrados por la consulta
-    */
-    public ResultSet consultarRegistros(String strSentenciaSQL){
+     */
+    public ResultSet consultarRegistros(String strSentenciaSQL) {
         try {
             PreparedStatement pstm = conn.prepareStatement(strSentenciaSQL);
             ResultSet respuesta = pstm.executeQuery();
@@ -56,6 +56,23 @@ public class Conexion {
         } catch (Exception e) {
             System.err.println(e);
             return null;
+        }
+    }
+    
+    /**
+     * 
+     * @param strSentenciaSQL , setencia SQL que sera ejecutado 
+     * @return devuelve falso o verdadero 
+     */
+
+    public boolean ejecutarSetenciaSQL(String strSentenciaSQL) {
+        try {
+            PreparedStatement pstm = conn.prepareStatement(strSentenciaSQL);
+            pstm.execute();
+            return true;
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
         }
     }
 }
