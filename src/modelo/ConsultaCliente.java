@@ -65,9 +65,7 @@ public class ConsultaCliente extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "DELETE   FROM cliente WHERE cedula_cliente=?";
-        System.out.println("modelo.ConsultaCliente.eliminar()");
-        System.out.println(client);
+        String sql = "DELETE FROM cliente WHERE cedula_cliente=?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -77,24 +75,21 @@ public class ConsultaCliente extends Conexion {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
-        }  
+        }
     }
 
     public boolean traerUnCliente(Cliente client) {
-       
+
         PreparedStatement ps = null;
         Connection con = getConnection();
         ResultSet respuesta = null;
         String sql = "SELECT * FROM cliente WHERE cedula_cliente=?";
-        
-        System.out.println("modelo.ConsultaCliente.traerUnCliente()");
-        System.out.println(client.getCedula_cliente());
+
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, client.getCedula_cliente());
             respuesta = ps.executeQuery();
-        
-        
+
             if (respuesta.next()) {
 //                client.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
 //                client.setNombre(respuesta.getString("nombre"));
@@ -103,6 +98,7 @@ public class ConsultaCliente extends Conexion {
 //                client.setTelefono(respuesta.getString("telefono"));
 //                client.setDireccion(respuesta.getString("direccion"));
 //                
+                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
 
                 System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
                 System.out.println(respuesta.getString("nombre"));
@@ -111,19 +107,21 @@ public class ConsultaCliente extends Conexion {
                 System.out.println(respuesta.getString("telefono"));
                 System.out.println(respuesta.getString("direccion"));
 
+                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+
             }
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
-        } 
+        }
 
     }
 
     public boolean traerClientes() {
         PreparedStatement ps = null;
         String sql = "SELECT * FROM cliente";
-        
+
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {
