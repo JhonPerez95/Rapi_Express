@@ -75,17 +75,15 @@ public class CtrCliente implements ActionListener {
             System.out.println(txtCedula.length());
 
             if (txtCedula.length() > 0) {
-                try {
+                if (isNumerico()) {
                     client.setCedula_cliente(Integer.parseInt(txtCedula));
                     if (consCliente.eliminar(client)) {
                         limpiarTxt();
-                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                        JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
                     } else {
                         limpiarTxt();
                         JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
                     }
-                } catch (NumberFormatException nfe) {
-                    JOptionPane.showMessageDialog(null, "El campo cedula debe ser un numero !");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Debe ingresar la cedula del cliente que quiere eliminar !");
@@ -132,5 +130,18 @@ public class CtrCliente implements ActionListener {
 
     public void ocultar() {
         frmCliente.setVisible(false);
+    }
+
+    public boolean isNumerico() {
+
+        String txtCedula = frmCliente.txtCedula.getText().trim();
+
+        try {
+            int cedulaCliente = Integer.parseInt(txtCedula);
+            return true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "El campo cedula debe ser un numero !");
+        }
+        return false;
     }
 }
