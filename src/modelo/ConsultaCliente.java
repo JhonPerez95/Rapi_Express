@@ -5,8 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import vista.FrmCliente;
 
 public class ConsultaCliente extends Conexion {
+
+    private FrmCliente frmCliente;
+    DefaultTableModel model;
+
+    public ConsultaCliente(FrmCliente frmCliente) {
+        this.frmCliente = frmCliente;
+
+        String[] titles = {"Cedula", "Nombre", "Apellido", "Correo", "Telefono", "Direccion"};
+        model = new DefaultTableModel(null, titles);
+        frmCliente.tblCliente.setModel(model);
+    }
 
     public boolean guardar(Cliente client) {
         PreparedStatement ps = null;
@@ -85,6 +98,9 @@ public class ConsultaCliente extends Conexion {
         ResultSet respuesta = null;
         String sql = "SELECT * FROM cliente WHERE cedula_cliente=?";
 
+        // Resetear datos tabla
+        model.setRowCount(0);
+
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, client.getCedula_cliente());
@@ -98,17 +114,10 @@ public class ConsultaCliente extends Conexion {
 //                client.setTelefono(respuesta.getString("telefono"));
 //                client.setDireccion(respuesta.getString("direccion"));
 //                
-                System.out.println("=============================");
 
-                System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
-                System.out.println(respuesta.getString("nombre"));
-                System.out.println(respuesta.getString("apellido"));
-                System.out.println(respuesta.getString("correo"));
-                System.out.println(respuesta.getString("telefono"));
-                System.out.println(respuesta.getString("direccion"));
-
-                System.out.println("=============================");
-
+                Object[] objCliente = {Integer.parseInt(respuesta.getString("cedula_cliente")), respuesta.getString("nombre"), respuesta.getString("apellido"),
+                    respuesta.getString("correo"), respuesta.getString("telefono"), respuesta.getString("direccion")};
+                model.addRow(objCliente);
             }
             return true;
         } catch (SQLException e) {
@@ -122,6 +131,8 @@ public class ConsultaCliente extends Conexion {
         PreparedStatement ps = null;
         String sql = "SELECT * FROM cliente";
 
+        // Resetear datos tabla
+        model.setRowCount(0);
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {
@@ -132,16 +143,9 @@ public class ConsultaCliente extends Conexion {
 //                client.setTelefono(respuesta.getString("telefono"));
 //                client.setDireccion(respuesta.getString("direccion"));
 
-                System.out.println("=============================");
-
-                System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
-                System.out.println(respuesta.getString("nombre"));
-                System.out.println(respuesta.getString("apellido"));
-                System.out.println(respuesta.getString("correo"));
-                System.out.println(respuesta.getString("telefono"));
-                System.out.println(respuesta.getString("direccion"));
-                
-                System.out.println("=============================");
+                Object[] objCliente = {Integer.parseInt(respuesta.getString("cedula_cliente")), respuesta.getString("nombre"), respuesta.getString("apellido"),
+                    respuesta.getString("correo"), respuesta.getString("telefono"), respuesta.getString("direccion")};
+                model.addRow(objCliente);
 
             }
             return true;

@@ -11,7 +11,7 @@ import vista.FrmInicial;
 public class CtrInicial implements ActionListener {
 
     private FrmInicial frmInicial;
-    
+
     public CtrInicial(FrmInicial frmInicial) {
         this.frmInicial = frmInicial;
         this.frmInicial.btnCliente.addActionListener(this);
@@ -31,21 +31,21 @@ public class CtrInicial implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if (e.getSource() == frmInicial.btnCliente) {
             Cliente client = new Cliente();
-            ConsultaCliente consCliente = new ConsultaCliente();
             FrmCliente frmCliente = new FrmCliente();
+            ConsultaCliente consCliente = new ConsultaCliente(frmCliente);
             CtrCliente ctrCliente = new CtrCliente(client, consCliente, frmCliente);
 
             ctrCliente.inicar();
         }
-        
+
         if (e.getSource() == frmInicial.btnFactura) {
             JOptionPane.showMessageDialog(null, "aqui va cargar el Frame Factura");
 
         }
-        
+
         if (e.getSource() == frmInicial.btnEmpleado) {
             JOptionPane.showMessageDialog(null, "aqui va cargar el Frame Empleado");
 
