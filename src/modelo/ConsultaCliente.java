@@ -98,7 +98,7 @@ public class ConsultaCliente extends Conexion {
 //                client.setTelefono(respuesta.getString("telefono"));
 //                client.setDireccion(respuesta.getString("direccion"));
 //                
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+                System.out.println("=============================");
 
                 System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
                 System.out.println(respuesta.getString("nombre"));
@@ -107,7 +107,7 @@ public class ConsultaCliente extends Conexion {
                 System.out.println(respuesta.getString("telefono"));
                 System.out.println(respuesta.getString("direccion"));
 
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+                System.out.println("=============================");
 
             }
             return true;
@@ -132,12 +132,16 @@ public class ConsultaCliente extends Conexion {
 //                client.setTelefono(respuesta.getString("telefono"));
 //                client.setDireccion(respuesta.getString("direccion"));
 
+                System.out.println("=============================");
+
                 System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
                 System.out.println(respuesta.getString("nombre"));
                 System.out.println(respuesta.getString("apellido"));
                 System.out.println(respuesta.getString("correo"));
                 System.out.println(respuesta.getString("telefono"));
                 System.out.println(respuesta.getString("direccion"));
+                
+                System.out.println("=============================");
 
             }
             return true;

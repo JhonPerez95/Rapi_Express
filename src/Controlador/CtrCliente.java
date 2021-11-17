@@ -33,33 +33,47 @@ public class CtrCliente implements ActionListener {
         if (e.getSource() == frmCliente.btnAgregar) {
 
             if (validarFormulario()) {
-                client.setCedula_cliente(Integer.parseInt(frmCliente.txtCedula.getText()));
-                client.setNombre(frmCliente.txtNombre.getText());
-                client.setApellido(frmCliente.txtApellido.getText());
-                client.setCorreo(frmCliente.txtCorreo.getText());
-                client.setTelefono(frmCliente.txtTelefono.getText());
-                client.setDireccion(frmCliente.txtDireccion.getText());
+                if (isNumerico()) {
+                    client.setCedula_cliente(Integer.parseInt(frmCliente.txtCedula.getText()));
+                    client.setNombre(frmCliente.txtNombre.getText());
+                    client.setApellido(frmCliente.txtApellido.getText());
+                    client.setCorreo(frmCliente.txtCorreo.getText());
+                    client.setTelefono(frmCliente.txtTelefono.getText());
+                    client.setDireccion(frmCliente.txtDireccion.getText());
 
-                if (consCliente.guardar(client)) {
-                    limpiarTxt();
-                    JOptionPane.showMessageDialog(null, "Registro Guardado");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al  guardar");
+                    if (consCliente.guardar(client)) {
+                        limpiarTxt();
+                        JOptionPane.showMessageDialog(null, "Registro Guardado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al  guardar");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios por llenar !");
             }
-
         }
 
         // BOTON CONSULTAR
         if (e.getSource() == frmCliente.btnConsultar) {
-            client.setCedula_cliente(Integer.parseInt(frmCliente.txtCedula.getText()));
-            if (consCliente.traerUnCliente(client)) {
-                limpiarTxt();
-                JOptionPane.showMessageDialog(null, "Se trajeron Registros con exito");
+            String txtCedula = frmCliente.txtCedula.getText().trim();
+
+            if (txtCedula.length() > 0) {
+                if (isNumerico()) {
+                    client.setCedula_cliente(Integer.parseInt(frmCliente.txtCedula.getText()));
+                    if (consCliente.traerUnCliente(client)) {
+                        limpiarTxt();
+                        JOptionPane.showMessageDialog(null, "Se trajo al cliente con exito !");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al  traer al cliente , por favor comunicarse con el administrador !");
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Error al  traer registros");
+                if (consCliente.traerClientes()) {
+                    limpiarTxt();
+                    JOptionPane.showMessageDialog(null, "Se trajo todos los clientes !");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al  traer al los clientes , por favor comunicarse con el administrador !");
+                }
             }
         }
 

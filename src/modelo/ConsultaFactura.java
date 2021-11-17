@@ -106,8 +106,7 @@ public class ConsultaFactura extends Conexion {
 //                factura.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
 //                factura.setId_empleado(Integer.parseInt(respuesta.getString("id_empleado")));
 
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
-
+                System.out.println("=============================");
                 System.out.println(Integer.parseInt(respuesta.getString("id_factura")));
                 System.out.println(respuesta.getString("fecha"));
                 System.out.println(respuesta.getString("cantidad"));
@@ -116,8 +115,7 @@ public class ConsultaFactura extends Conexion {
                 System.out.println(respuesta.getString("total_pagar"));
                 System.out.println(respuesta.getString("cedula_cliente"));
                 System.out.println(respuesta.getString("id_empleado"));
-
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+                System.out.println("=============================");
             }
             return true;
         } catch (SQLException e) {
@@ -142,7 +140,7 @@ public class ConsultaFactura extends Conexion {
 //                factura.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
 //                factura.setId_empleado(Integer.parseInt(respuesta.getString("id_empleado")));                System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
 
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+                System.out.println("=============================");
 
                 System.out.println(Integer.parseInt(respuesta.getString("id_factura")));
                 System.out.println(respuesta.getString("fecha"));
@@ -153,7 +151,7 @@ public class ConsultaFactura extends Conexion {
                 System.out.println(respuesta.getString("cedula_cliente"));
                 System.out.println(respuesta.getString("id_empleado"));
 
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+                System.out.println("=============================");
             }
             return true;
         } catch (SQLException e) {

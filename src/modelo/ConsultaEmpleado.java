@@ -95,16 +95,14 @@ public class ConsultaEmpleado extends Conexion {
 //                empleado.setCedula(Integer.parseInt(respuesta.getString("cedula")));
 //                empleado.setRol(respuesta.getString("rol"));
 
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
-
+                System.out.println("=============================");
                 System.out.println(Integer.parseInt(respuesta.getString("id_cliente")));
                 System.out.println(respuesta.getString("nombre"));
                 System.out.println(respuesta.getString("apellido"));
                 System.out.println(Integer.parseInt(respuesta.getString("salario")));
                 System.out.println(Integer.parseInt(respuesta.getString("cedula")));
                 System.out.println(respuesta.getString("rol"));
-                
-                System.out.println(Integer.parseInt(respuesta.getString("=============================")));
+                System.out.println("=============================");
 
             }
             return true;
@@ -129,13 +127,14 @@ public class ConsultaEmpleado extends Conexion {
 //                empleado.setCedula(Integer.parseInt(respuesta.getString("cedula")));
 //                empleado.setRol(respuesta.getString("rol"));
 
+                System.out.println("=============================");
                 System.out.println(Integer.parseInt(respuesta.getString("id_cliente")));
                 System.out.println(respuesta.getString("nombre"));
                 System.out.println(respuesta.getString("apellido"));
                 System.out.println(Integer.parseInt(respuesta.getString("salario")));
                 System.out.println(Integer.parseInt(respuesta.getString("cedula")));
                 System.out.println(respuesta.getString("rol"));
-
+                System.out.println("=============================");
             }
             return true;
         } catch (SQLException e) {
