@@ -76,13 +76,8 @@ public class ConsultaCliente extends Conexion {
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, e.getMessage());
-
             return false;
-        }
-         
-        
-
+        }  
     }
 
     public boolean traerUnCliente(Cliente client) {
