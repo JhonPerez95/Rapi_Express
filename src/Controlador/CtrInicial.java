@@ -3,10 +3,21 @@ package Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import modelo.Cliente;
+
 import modelo.ConsultaCliente;
+import modelo.ConsultaEmpleado;
+import modelo.ConsultaFactura;
+
+import modelo.Empleado;
+import modelo.Factura;
+import modelo.Cliente;
+
 import vista.FrmCliente;
+import vista.FrmEmpleado;
+import vista.FrmFactura;
 import vista.FrmInicial;
+import vista.FrmBienvenida;
+
 
 public class CtrInicial implements ActionListener {
 
@@ -17,6 +28,8 @@ public class CtrInicial implements ActionListener {
         this.frmInicial.btnCliente.addActionListener(this);
         this.frmInicial.btnFactura.addActionListener(this);
         this.frmInicial.btnEmpleado.addActionListener(this);
+        this.frmInicial.btnBienvenida.addActionListener(this);
+
     }
 
     public void mostrarFrame() {
@@ -37,18 +50,35 @@ public class CtrInicial implements ActionListener {
             FrmCliente frmCliente = new FrmCliente();
             ConsultaCliente consCliente = new ConsultaCliente(frmCliente);
             CtrCliente ctrCliente = new CtrCliente(client, consCliente, frmCliente);
-
+            
             ctrCliente.inicar();
+            ctrCliente.llenarTabla();
         }
 
         if (e.getSource() == frmInicial.btnFactura) {
-            JOptionPane.showMessageDialog(null, "aqui va cargar el Frame Factura");
+            Factura factura = new Factura();
+            FrmFactura frmFactura = new FrmFactura();
+            ConsultaFactura consFactura = new ConsultaFactura();
+            CtrFactura ctrFactura = new CtrFactura(factura, consFactura, frmFactura);
 
+            ctrFactura.inicar();
         }
 
         if (e.getSource() == frmInicial.btnEmpleado) {
-            JOptionPane.showMessageDialog(null, "aqui va cargar el Frame Empleado");
+            Empleado empleado = new Empleado();
+            FrmEmpleado frmEmpleado = new FrmEmpleado();
+            ConsultaEmpleado consEmpleado = new ConsultaEmpleado();
+            CtrEmpleado ctrEmpleado = new CtrEmpleado(empleado,consEmpleado, frmEmpleado);
 
+            ctrEmpleado.inicar();
+
+        }
+
+        if (e.getSource() == frmInicial.btnBienvenida) {
+            FrmBienvenida frmEmpleado = new FrmBienvenida();
+            CtrBienvenida ctrBienvenida = new CtrBienvenida(frmEmpleado);
+            
+            ctrBienvenida.inicar();
         }
     }
 }
