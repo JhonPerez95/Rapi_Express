@@ -15,8 +15,8 @@ public class Conexion {
 
     String driver = "com.mysql.cj.jdbc.Driver";
     String user = "root";
-    String pass = "root12345";
-    String nameDb = "bdcaferapiexpress";
+    String pass = "";
+    String nameDb = "rapiexpress";
     String url = "jdbc:mysql://localhost:3306/" + nameDb + "?useUnicode=true&use"
             + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
             + "serverTimezone=UTC";
@@ -26,7 +26,7 @@ public class Conexion {
 
     public Conexion() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, pass);
             if (conn != null) {
                 System.out.println("Se conecto a la db: " + nameDb);
