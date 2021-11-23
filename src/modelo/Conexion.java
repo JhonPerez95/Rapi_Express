@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author jhonperez
@@ -15,19 +14,24 @@ public class Conexion {
 
     String driver = "com.mysql.jdbc.Driver";
     String user = "root";
-    String pass = "";
-    String nameDb = "rapiexpress";
+    String pass = "root12345";    
+    //String pass = "root12345";
+
+    String nameDb = "bdcaferapiexpress";  
+    //String nameDb = "bdcaferapiexpress";
     String url = "jdbc:mysql://localhost:3306/" + nameDb + "?useUnicode=true&use"
             + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
             + "serverTimezone=UTC";
 
     Connection conn = null;
-    //constructor de la clase
+//constructor de la clase
 
     public Conexion() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-              conn = DriverManager.getConnection(url, user, pass);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+
+            conn = DriverManager.getConnection(url, user, pass);
             if (conn != null) {
                 System.out.println("Se conecto a la db: " + nameDb);
             }
@@ -58,13 +62,12 @@ public class Conexion {
             return null;
         }
     }
-    
-    /**
-     * 
-     * @param strSentenciaSQL , setencia SQL que sera ejecutado 
-     * @return devuelve falso o verdadero 
-     */
 
+    /**
+     *
+     * @param strSentenciaSQL , setencia SQL que sera ejecutado
+     * @return devuelve falso o verdadero
+     */
     public boolean ejecutarSetenciaSQL(String strSentenciaSQL) {
         try {
             PreparedStatement pstm = conn.prepareStatement(strSentenciaSQL);

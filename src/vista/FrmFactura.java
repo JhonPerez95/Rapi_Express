@@ -137,13 +137,27 @@ public class FrmFactura extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblFactura.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblFacturaMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tblFactura);
+        if (tblFactura.getColumnModel().getColumnCount() > 0) {
+            tblFactura.getColumnModel().getColumn(0).setResizable(false);
+            tblFactura.getColumnModel().getColumn(1).setResizable(false);
+            tblFactura.getColumnModel().getColumn(2).setResizable(false);
+            tblFactura.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

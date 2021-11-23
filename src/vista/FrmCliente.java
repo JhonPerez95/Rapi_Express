@@ -87,6 +87,7 @@ public class FrmCliente extends javax.swing.JFrame {
         tblCliente.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         tblCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblCliente.setDoubleBuffered(true);
+        tblCliente.setEnabled(false);
         tblCliente.setPreferredSize(new java.awt.Dimension(900, 80));
         tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,17 +96,15 @@ public class FrmCliente extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblCliente);
         if (tblCliente.getColumnModel().getColumnCount() > 0) {
-            tblCliente.getColumnModel().getColumn(0).setHeaderValue("Cedula");
-            tblCliente.getColumnModel().getColumn(1).setMinWidth(25);
+            tblCliente.getColumnModel().getColumn(0).setResizable(false);
+            tblCliente.getColumnModel().getColumn(1).setResizable(false);
             tblCliente.getColumnModel().getColumn(1).setPreferredWidth(25);
-            tblCliente.getColumnModel().getColumn(1).setHeaderValue("Nombre");
-            tblCliente.getColumnModel().getColumn(2).setMinWidth(25);
+            tblCliente.getColumnModel().getColumn(2).setResizable(false);
             tblCliente.getColumnModel().getColumn(2).setPreferredWidth(25);
-            tblCliente.getColumnModel().getColumn(2).setHeaderValue("Apellido");
+            tblCliente.getColumnModel().getColumn(3).setResizable(false);
             tblCliente.getColumnModel().getColumn(3).setPreferredWidth(100);
-            tblCliente.getColumnModel().getColumn(3).setHeaderValue("Correo");
-            tblCliente.getColumnModel().getColumn(4).setHeaderValue("Telefono");
-            tblCliente.getColumnModel().getColumn(5).setHeaderValue("Direccion");
+            tblCliente.getColumnModel().getColumn(4).setResizable(false);
+            tblCliente.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnConsultar.setText("Consultar");
