@@ -75,7 +75,6 @@ public class ConsultaEmpleado extends Conexion {
         Connection con = getConnection();
 
         String sql = "DELETE FROM empleado WHERE id_empleado=?";
-
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, empleado.getId_empleado());
@@ -92,11 +91,14 @@ public class ConsultaEmpleado extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConnection();
         ResultSet respuesta = null;
-        String sql = "SELECT * FROM empleado WHERE id_empleado=?";
-
+        String sql = "SELECT * FROM empleado WHERE cedula=?";
+        
+        // Resetear datos tabla
+        model.setRowCount(0);
+        
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, empleado.getId_empleado());
+            ps.setInt(1, empleado.getCedula());
             respuesta = ps.executeQuery();
 
             if (respuesta.next()) {
@@ -115,7 +117,10 @@ public class ConsultaEmpleado extends Conexion {
     public boolean traerEmpleados() {
         PreparedStatement ps = null;
         String sql = "SELECT * FROM empleado";
-
+        
+        // Resetear datos tabla
+        model.setRowCount(0);
+        
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {

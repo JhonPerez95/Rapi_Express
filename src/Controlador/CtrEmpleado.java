@@ -31,13 +31,52 @@ public class CtrEmpleado implements ActionListener {
 
         // BOTON AGREGAR
         if (e.getSource() == frmEmpleado.btnAgregar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton Agregar");
+            String txtCedula = frmEmpleado.txtCedula.getText().trim();
+            String txtSalario = frmEmpleado.txtSalario.getText().trim();
+            String rol = frmEmpleado.cbxRol.getSelectedItem().toString();
+            if (validarFormulario()) {
+                if (isNumerico(txtCedula, "Cedula") && isNumerico(txtSalario, "Salario")) {
+                    empleado.setCedula(Integer.parseInt(txtCedula));
+                    empleado.setNombre(frmEmpleado.txtNombre.getText());
+                    empleado.setApellido(frmEmpleado.txtApellido.getText());
+                    empleado.setSalario(Integer.parseInt(txtSalario));
+                    empleado.setRol(rol);
 
+                    if (consEmpleado.guardar(empleado)) {
+                        limpiarTxt();
+                        llenarTabla();
+                        JOptionPane.showMessageDialog(null, "Registro Guardado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al  guardar");
+                    }
+                }
+            }
         }
 
         // BOTON ACTUALIZAR
         if (e.getSource() == frmEmpleado.btnModificar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton actualizar");
+            String txtCedula = frmEmpleado.txtCedula.getText().trim();
+            String txtSalario = frmEmpleado.txtSalario.getText().trim();
+            String rol = frmEmpleado.cbxRol.getSelectedItem().toString();
+
+            if (validarFormulario()) {
+                if (isNumerico(txtCedula, "Cedula") && isNumerico(txtSalario, "Salario")) {
+                    empleado.setId_empleado(Integer.parseInt(frmEmpleado.txtId.getText()));
+                    empleado.setCedula(Integer.parseInt(txtCedula));
+                    empleado.setNombre(frmEmpleado.txtNombre.getText());
+                    empleado.setApellido(frmEmpleado.txtApellido.getText());
+                    empleado.setSalario(Integer.parseInt(txtSalario));
+                    empleado.setRol(rol);
+
+                    if (consEmpleado.modificar(empleado)) {
+                        limpiarTxt();
+                        llenarTabla();
+                        JOptionPane.showMessageDialog(null, "El Empleado fue actualizado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al  guardar");
+                    }
+                }
+            }
         }
 
         // BOTON CONSULTAR
@@ -52,7 +91,23 @@ public class CtrEmpleado implements ActionListener {
 
         // BOTON ELIMINAR
         if (e.getSource() == frmEmpleado.btnEliminar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton Eliminar");
+            String txtCedula = frmEmpleado.txtCedula.getText().trim();
+
+            if (txtCedula.length() > 0) {
+                if (isNumerico(txtCedula, "Cedula")) {
+                    empleado.setId_empleado(Integer.parseInt(frmEmpleado.txtId.getText()));
+                    if (consEmpleado.eliminar(empleado)) {
+                        limpiarTxt();
+                        JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
+                        llenarTabla();
+                    } else {
+                        limpiarTxt();
+                        JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe ingresar la cedula del Empleado que quiere eliminar !");
+            }
         }
     }
 
@@ -105,17 +160,17 @@ public class CtrEmpleado implements ActionListener {
                 empleado.setCedula(Integer.parseInt(txtCedula));
                 if (consEmpleado.traerUnEmpleado(empleado)) {
                     limpiarTxt();
-                    System.out.println("Se trajo todos los clientes !");
+                    System.out.println("Se trajo todos los Empleados !");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al  traer al cliente , por favor comunicarse con el administrador !");
+                    JOptionPane.showMessageDialog(null, "Error al  traer al Empleado , por favor comunicarse con el administrador !");
                 }
             }
         } else {
             if (consEmpleado.traerEmpleados()) {
                 limpiarTxt();
-                System.out.println("Se trajo todos los clientes !");
+                System.out.println("Se trajo todos los Empleados !");
             } else {
-                JOptionPane.showMessageDialog(null, "Error al  traer al los clientes , por favor comunicarse con el administrador !");
+                JOptionPane.showMessageDialog(null, "Error al  traer al los Empleados , por favor comunicarse con el administrador !");
             }
         }
     }
@@ -125,5 +180,6 @@ public class CtrEmpleado implements ActionListener {
         frmEmpleado.txtNombre.setText(null);
         frmEmpleado.txtApellido.setText(null);
         frmEmpleado.txtSalario.setText(null);
+        frmEmpleado.txtId.setText(null);
     }
 }
