@@ -87,6 +87,11 @@ public class FrmCliente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClienteMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblCliente);
 
         btnConsultar.setText("Consultar");
@@ -168,7 +173,7 @@ public class FrmCliente extends javax.swing.JFrame {
                                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 9, Short.MAX_VALUE)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,6 +234,19 @@ public class FrmCliente extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+        // TODO add your handling code here:
+        int seleccion = tblCliente.rowAtPoint(evt.getPoint());
+        txtCedula.setText(String.valueOf(tblCliente.getValueAt(seleccion, 0)));
+        txtNombre.setText(String.valueOf(tblCliente.getValueAt(seleccion, 1)));
+        txtApellido.setText(String.valueOf(tblCliente.getValueAt(seleccion, 2)));
+        txtCorreo.setText(String.valueOf(tblCliente.getValueAt(seleccion, 3)));
+        txtTelefono.setText(String.valueOf(tblCliente.getValueAt(seleccion, 4)));
+        txtDireccion.setText(String.valueOf(tblCliente.getValueAt(seleccion, 5)));
+        
+              
+    }//GEN-LAST:event_tblClienteMouseClicked
 
     /**
      * @param args the command line arguments
