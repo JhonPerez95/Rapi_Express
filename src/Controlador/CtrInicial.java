@@ -58,10 +58,11 @@ public class CtrInicial implements ActionListener {
         if (e.getSource() == frmInicial.btnFactura) {
             Factura factura = new Factura();
             FrmFactura frmFactura = new FrmFactura();
-            ConsultaFactura consFactura = new ConsultaFactura();
+            ConsultaFactura consFactura = new ConsultaFactura(frmFactura);
             CtrFactura ctrFactura = new CtrFactura(factura, consFactura, frmFactura);
 
             ctrFactura.inicar();
+            ctrFactura.llenarTabla();
         }
 
         if (e.getSource() == frmInicial.btnEmpleado) {

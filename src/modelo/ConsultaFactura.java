@@ -8,8 +8,21 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import vista.FrmFactura;
 
 public class ConsultaFactura extends Conexion {
+
+    private FrmFactura frmFactura;
+    DefaultTableModel model;
+
+    public ConsultaFactura(FrmFactura frmFactura) {
+        this.frmFactura = frmFactura;
+
+        String[] titles = {"ID", "Fecha", "Cantidad", "Detalle", "Forma Pago", "Total Pagar", "Cliente", "Empleado"};
+        model = new DefaultTableModel(null, titles);
+        frmFactura.tblFactura.setModel(model);
+    }
 
     public boolean guardar(Factura factura) {
         PreparedStatement ps = null;
@@ -82,40 +95,28 @@ public class ConsultaFactura extends Conexion {
         }
     }
 
-    public boolean traerUnaFactura(Factura factura) throws ParseException {
+    public boolean traerUnaFactura(Factura factura) {
 
         PreparedStatement ps = null;
         Connection con = getConnection();
         ResultSet respuesta = null;
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         String sql = "SELECT * FROM factura WHERE id_factura=?";
-
+        
+        // Resetear datos tabla
+        model.setRowCount(0);
+        
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, factura.getId_factura());
             respuesta = ps.executeQuery();
 
             if (respuesta.next()) {
-//                factura.setId_factura(Integer.parseInt(respuesta.getString("id_factura")));
-//                factura.setFecha(formato.parse(respuesta.getString("fecha")));
-//                factura.setCantidad(Integer.parseInt(respuesta.getString("cantidad")));
-//                factura.setDetalle(respuesta.getString("detalle"));
-//                factura.setForma_pago(respuesta.getString("forma_pago"));
-//                factura.setTotal_pagar(Integer.parseInt(respuesta.getString("total_pagar")));
-//                factura.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
-//                factura.setId_empleado(Integer.parseInt(respuesta.getString("id_empleado")));
-
-                System.out.println("=============================");
-                System.out.println(Integer.parseInt(respuesta.getString("id_factura")));
-                System.out.println(respuesta.getString("fecha"));
-                System.out.println(respuesta.getString("cantidad"));
-                System.out.println(respuesta.getString("detalle"));
-                System.out.println(respuesta.getString("forma_pago"));
-                System.out.println(respuesta.getString("total_pagar"));
-                System.out.println(respuesta.getString("cedula_cliente"));
-                System.out.println(respuesta.getString("id_empleado"));
-                System.out.println("=============================");
+                Object[] objFactura = {Integer.parseInt(respuesta.getString("id_factura")), respuesta.getString("fecha"), respuesta.getString("cantidad"),
+                    respuesta.getString("detalle"), respuesta.getString("forma_pago"), respuesta.getString("total_pagar"), respuesta.getString("cedula_cliente"),
+                    respuesta.getString("id_empleado")};
+                model.addRow(objFactura);
             }
             return true;
         } catch (SQLException e) {
@@ -127,31 +128,17 @@ public class ConsultaFactura extends Conexion {
     public boolean traerFacturas() {
         PreparedStatement ps = null;
         String sql = "SELECT * FROM factura";
+        
+        // Resetear datos tabla
+        model.setRowCount(0);
 
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {
-//                factura.setId_factura(Integer.parseInt(respuesta.getString("id_factura")));
-//                factura.setFecha(formato.parse(respuesta.getString("fecha")));
-//                factura.setCantidad(Integer.parseInt(respuesta.getString("cantidad")));
-//                factura.setDetalle(respuesta.getString("detalle"));
-//                factura.setForma_pago(respuesta.getString("forma_pago"));
-//                factura.setTotal_pagar(Integer.parseInt(respuesta.getString("total_pagar")));
-//                factura.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
-//                factura.setId_empleado(Integer.parseInt(respuesta.getString("id_empleado")));                System.out.println(Integer.parseInt(respuesta.getString("cedula_cliente")));
-
-                System.out.println("=============================");
-
-                System.out.println(Integer.parseInt(respuesta.getString("id_factura")));
-                System.out.println(respuesta.getString("fecha"));
-                System.out.println(respuesta.getString("cantidad"));
-                System.out.println(respuesta.getString("detalle"));
-                System.out.println(respuesta.getString("forma_pago"));
-                System.out.println(respuesta.getString("total_pagar"));
-                System.out.println(respuesta.getString("cedula_cliente"));
-                System.out.println(respuesta.getString("id_empleado"));
-
-                System.out.println("=============================");
+                Object[] objFactura = {Integer.parseInt(respuesta.getString("id_factura")), respuesta.getString("fecha"), respuesta.getString("cantidad"),
+                    respuesta.getString("detalle"), respuesta.getString("forma_pago"), respuesta.getString("total_pagar"), respuesta.getString("cedula_cliente"),
+                    respuesta.getString("id_empleado")};
+                model.addRow(objFactura);
             }
             return true;
         } catch (SQLException e) {
