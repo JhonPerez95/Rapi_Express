@@ -146,6 +146,8 @@ public class FrmFactura extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblFactura.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        tblFactura.setEnabled(false);
         tblFactura.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblFacturaMouseClicked(evt);

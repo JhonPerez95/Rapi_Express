@@ -67,11 +67,11 @@ public class CtrInicial implements ActionListener {
         if (e.getSource() == frmInicial.btnEmpleado) {
             Empleado empleado = new Empleado();
             FrmEmpleado frmEmpleado = new FrmEmpleado();
-            ConsultaEmpleado consEmpleado = new ConsultaEmpleado();
+            ConsultaEmpleado consEmpleado = new ConsultaEmpleado(frmEmpleado);
             CtrEmpleado ctrEmpleado = new CtrEmpleado(empleado,consEmpleado, frmEmpleado);
 
             ctrEmpleado.inicar();
-
+            ctrEmpleado.llenarTabla();
         }
 
         if (e.getSource() == frmInicial.btnBienvenida) {

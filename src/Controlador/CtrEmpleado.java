@@ -26,8 +26,7 @@ public class CtrEmpleado implements ActionListener {
     }
 
     //
-    
-      @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
 
         // BOTON AGREGAR
@@ -43,7 +42,7 @@ public class CtrEmpleado implements ActionListener {
 
         // BOTON CONSULTAR
         if (e.getSource() == frmEmpleado.btnConsultar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton Consultar");
+            llenarTabla();
         }
 
         // BOTON CANCELAR
@@ -69,15 +68,62 @@ public class CtrEmpleado implements ActionListener {
     }
 
     public boolean isNumerico(String txtCampo, String nombreCampo) {
-
-        try {
-            Integer.parseInt(txtCampo);
+        if (txtCampo.matches("[0-9]*")) {
             return true;
-        } catch (NumberFormatException nfe) {
+        } else {
             JOptionPane.showMessageDialog(null, "El campo " + nombreCampo + " debe ser un numerico !");
+            return false;
         }
-        return false;
     }
 
+    public boolean validarFormulario() {
+        if (frmEmpleado.txtCedula.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo Cedula es obligatorio! ");
+            return false;
+        }
+        if (frmEmpleado.txtNombre.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo Nombre es obligatorio! ");
+            return false;
+        }
+        if (frmEmpleado.txtApellido.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo Apellido es obligatorio! ");
+            return false;
+        }
+        if (frmEmpleado.txtSalario.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo Correo es obligatorio! ");
+            return false;
+        }
 
+        return true;
+    }
+
+    public void llenarTabla() {
+        String txtCedula = frmEmpleado.txtCedula.getText().trim();
+
+        if (txtCedula.length() > 0) {
+            if (isNumerico(txtCedula, "Cedula")) {
+                empleado.setCedula(Integer.parseInt(txtCedula));
+                if (consEmpleado.traerUnEmpleado(empleado)) {
+                    limpiarTxt();
+                    System.out.println("Se trajo todos los clientes !");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al  traer al cliente , por favor comunicarse con el administrador !");
+                }
+            }
+        } else {
+            if (consEmpleado.traerEmpleados()) {
+                limpiarTxt();
+                System.out.println("Se trajo todos los clientes !");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al  traer al los clientes , por favor comunicarse con el administrador !");
+            }
+        }
+    }
+
+    public void limpiarTxt() {
+        frmEmpleado.txtCedula.setText(null);
+        frmEmpleado.txtNombre.setText(null);
+        frmEmpleado.txtApellido.setText(null);
+        frmEmpleado.txtSalario.setText(null);
+    }
 }

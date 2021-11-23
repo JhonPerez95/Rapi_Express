@@ -88,6 +88,7 @@ public class FrmCliente extends javax.swing.JFrame {
         tblCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblCliente.setDoubleBuffered(true);
         tblCliente.setEnabled(false);
+        tblCliente.setFocusCycleRoot(true);
         tblCliente.setPreferredSize(new java.awt.Dimension(900, 80));
         tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -5,8 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import vista.FrmEmpleado;
 
 public class ConsultaEmpleado extends Conexion {
+
+    private FrmEmpleado frmEmpleado;
+    DefaultTableModel model;
+
+    public ConsultaEmpleado(FrmEmpleado frmEmpleado) {
+        this.frmEmpleado = frmEmpleado;
+        String[] titles = {"ID", "Nombre", "Apellido", "Salario", "Cedula", "Rol"};
+        model = new DefaultTableModel(null, titles);
+        frmEmpleado.tblEmpleado.setModel(model);
+    }
 
     public boolean guardar(Empleado empleado) {
         PreparedStatement ps = null;
@@ -88,22 +100,9 @@ public class ConsultaEmpleado extends Conexion {
             respuesta = ps.executeQuery();
 
             if (respuesta.next()) {
-//                empleado.setId_empleado(Integer.parseInt(respuesta.getString("cedula_cliente")));
-//                empleado.setNombre(respuesta.getString("nombre"));
-//                empleado.setApellido(respuesta.getString("apellido"));
-//                empleado.setSalario(Integer.parseInt(respuesta.getString("salario")));
-//                empleado.setCedula(Integer.parseInt(respuesta.getString("cedula")));
-//                empleado.setRol(respuesta.getString("rol"));
-
-                System.out.println("=============================");
-                System.out.println(Integer.parseInt(respuesta.getString("id_cliente")));
-                System.out.println(respuesta.getString("nombre"));
-                System.out.println(respuesta.getString("apellido"));
-                System.out.println(Integer.parseInt(respuesta.getString("salario")));
-                System.out.println(Integer.parseInt(respuesta.getString("cedula")));
-                System.out.println(respuesta.getString("rol"));
-                System.out.println("=============================");
-
+                Object[] objEmpleado = {Integer.parseInt(respuesta.getString("id_empleado")), respuesta.getString("nombre"), respuesta.getString("apellido"),
+                    respuesta.getString("salario"), respuesta.getString("cedula"), respuesta.getString("rol")};
+                model.addRow(objEmpleado);
             }
             return true;
         } catch (SQLException e) {
@@ -113,28 +112,16 @@ public class ConsultaEmpleado extends Conexion {
 
     }
 
-    public boolean traerClientes() {
+    public boolean traerEmpleados() {
         PreparedStatement ps = null;
         String sql = "SELECT * FROM empleado";
 
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {
-//                empleado.setId_empleado(Integer.parseInt(respuesta.getString("cedula_cliente")));
-//                empleado.setNombre(respuesta.getString("nombre"));
-//                empleado.setApellido(respuesta.getString("apellido"));
-//                empleado.setSalario(Integer.parseInt(respuesta.getString("salario")));
-//                empleado.setCedula(Integer.parseInt(respuesta.getString("cedula")));
-//                empleado.setRol(respuesta.getString("rol"));
-
-                System.out.println("=============================");
-                System.out.println(Integer.parseInt(respuesta.getString("id_cliente")));
-                System.out.println(respuesta.getString("nombre"));
-                System.out.println(respuesta.getString("apellido"));
-                System.out.println(Integer.parseInt(respuesta.getString("salario")));
-                System.out.println(Integer.parseInt(respuesta.getString("cedula")));
-                System.out.println(respuesta.getString("rol"));
-                System.out.println("=============================");
+                Object[] objEmpleado = {Integer.parseInt(respuesta.getString("id_empleado")), respuesta.getString("nombre"), respuesta.getString("apellido"),
+                    respuesta.getString("salario"), respuesta.getString("cedula"), respuesta.getString("rol")};
+                model.addRow(objEmpleado);
             }
             return true;
         } catch (SQLException e) {

@@ -136,12 +136,6 @@ public class ConsultaCliente extends Conexion {
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {
-//                client.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
-//                client.setNombre(respuesta.getString("nombre"));
-//                client.setApellido(respuesta.getString("apellido"));
-//                client.setCorreo(respuesta.getString("correo"));
-//                client.setTelefono(respuesta.getString("telefono"));
-//                client.setDireccion(respuesta.getString("direccion"));
 
                 Object[] objCliente = {Integer.parseInt(respuesta.getString("cedula_cliente")), respuesta.getString("nombre"), respuesta.getString("apellido"),
                     respuesta.getString("correo"), respuesta.getString("telefono"), respuesta.getString("direccion")};
