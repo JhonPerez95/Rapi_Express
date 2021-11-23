@@ -41,7 +41,7 @@ public class FrmBienvenida extends javax.swing.JFrame {
         jLabel1.setLabelFor(jLabel1);
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(139, 139, 139));
         jPanel1.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
