@@ -43,7 +43,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblEmpleado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,7 +107,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
             }
         });
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,7 +118,12 @@ public class FrmEmpleado extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tblCliente);
+        tblEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmpleadoMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblEmpleado);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -233,6 +238,17 @@ public class FrmEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
+        // TODO add your handling code here:
+        int seleccion = tblEmpleado.rowAtPoint(evt.getPoint());
+        txtNombre.setText(String.valueOf(tblEmpleado.getValueAt(seleccion, 0)));
+        txtApellido.setText(String.valueOf(tblEmpleado.getValueAt(seleccion, 1)));
+        txtCedula.setText(String.valueOf(tblEmpleado.getValueAt(seleccion, 2)));
+        txtSalario.setText(String.valueOf(tblEmpleado.getValueAt(seleccion, 3)));
+        txtRol.setText(String.valueOf(tblEmpleado.getValueAt(seleccion, 4)));
+        
+    }//GEN-LAST:event_tblEmpleadoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -281,7 +297,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
     public javax.swing.JLabel lblNombre;
     public javax.swing.JLabel lblRol;
     public javax.swing.JLabel lblSalario;
-    public javax.swing.JTable tblCliente;
+    public javax.swing.JTable tblEmpleado;
     public javax.swing.JTextField txtApellido;
     public javax.swing.JTextField txtCedula;
     public javax.swing.JTextField txtNombre;

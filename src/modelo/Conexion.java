@@ -13,10 +13,10 @@ import java.sql.SQLException;
  */
 public class Conexion {
 
-    String driver = "com.mysql.cj.jdbc.Driver";
+    String driver = "com.mysql.jdbc.Driver";
     String user = "root";
-    String pass = "root12345";
-    String nameDb = "bdcaferapiexpress";
+    String pass = "";
+    String nameDb = "rapiexpress";
     String url = "jdbc:mysql://localhost:3306/" + nameDb + "?useUnicode=true&use"
             + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
             + "serverTimezone=UTC";
@@ -26,7 +26,7 @@ public class Conexion {
 
     public Conexion() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
               conn = DriverManager.getConnection(url, user, pass);
             if (conn != null) {
                 System.out.println("Se conecto a la db: " + nameDb);
@@ -53,7 +53,7 @@ public class Conexion {
             PreparedStatement pstm = conn.prepareStatement(strSentenciaSQL);
             ResultSet respuesta = pstm.executeQuery();
             return respuesta;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             return null;
         }
@@ -70,7 +70,7 @@ public class Conexion {
             PreparedStatement pstm = conn.prepareStatement(strSentenciaSQL);
             pstm.execute();
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             return false;
         }

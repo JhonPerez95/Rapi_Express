@@ -88,6 +88,11 @@ public class FrmCliente extends javax.swing.JFrame {
         tblCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblCliente.setDoubleBuffered(true);
         tblCliente.setPreferredSize(new java.awt.Dimension(900, 80));
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClienteMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblCliente);
         if (tblCliente.getColumnModel().getColumnCount() > 0) {
             tblCliente.getColumnModel().getColumn(0).setHeaderValue("Cedula");
@@ -258,6 +263,17 @@ public class FrmCliente extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+        // Evento para pasar de la tabla a los TXT:
+        int seleccion = tblCliente.rowAtPoint(evt.getPoint());
+        txtCedula.setText(String.valueOf(tblCliente.getValueAt(seleccion, 0)));
+        txtNombre.setText(String.valueOf(tblCliente.getValueAt(seleccion, 1)));
+        txtApellido.setText(String.valueOf(tblCliente.getValueAt(seleccion, 2)));
+        txtCorreo.setText(String.valueOf(tblCliente.getValueAt(seleccion, 3)));
+        txtTelefono.setText(String.valueOf(tblCliente.getValueAt(seleccion, 4)));
+        txtDireccion.setText(String.valueOf(tblCliente.getValueAt(seleccion, 5)));
+    }//GEN-LAST:event_tblClienteMouseClicked
 
     /**
      * @param args the command line arguments

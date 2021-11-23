@@ -34,7 +34,7 @@ public class FrmFactura extends javax.swing.JFrame {
         lblNombre4 = new javax.swing.JLabel();
         lblNombre5 = new javax.swing.JLabel();
         lblNombre6 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         txtFormadePago = new javax.swing.JTextField();
         txtDetalle = new javax.swing.JTextField();
@@ -47,7 +47,7 @@ public class FrmFactura extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblFactura = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,9 +65,9 @@ public class FrmFactura extends javax.swing.JFrame {
 
         lblNombre6.setText("Id Empleado");
 
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+                txtFechaActionPerformed(evt);
             }
         });
 
@@ -127,7 +127,7 @@ public class FrmFactura extends javax.swing.JFrame {
             }
         });
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -138,7 +138,12 @@ public class FrmFactura extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tblCliente);
+        tblFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblFacturaMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblFactura);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,7 +181,7 @@ public class FrmFactura extends javax.swing.JFrame {
                             .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(53, 53, 53)
@@ -202,7 +207,7 @@ public class FrmFactura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTotalaPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -235,9 +240,9 @@ public class FrmFactura extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
@@ -270,6 +275,18 @@ public class FrmFactura extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tblFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFacturaMouseClicked
+        // Evento para seleccionar en tabla de factura
+        int seleccion = tblFactura.rowAtPoint(evt.getPoint());
+        txtFecha.setText(String.valueOf(tblFactura.getValueAt(seleccion, 0)));
+        txtCantidad.setText(String.valueOf(tblFactura.getValueAt(seleccion, 1)));
+        txtDetalle.setText(String.valueOf(tblFactura.getValueAt(seleccion, 2)));
+        txtFormadePago.setText(String.valueOf(tblFactura.getValueAt(seleccion, 3)));
+        txtTotalaPagar.setText(String.valueOf(tblFactura.getValueAt(seleccion, 4)));
+        txtCedulaCliente.setText(String.valueOf(tblFactura.getValueAt(seleccion, 5)));
+        txtIdEmpleado.setText(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
+    }//GEN-LAST:event_tblFacturaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -321,13 +338,13 @@ public class FrmFactura extends javax.swing.JFrame {
     public javax.swing.JLabel lblNombre4;
     public javax.swing.JLabel lblNombre5;
     public javax.swing.JLabel lblNombre6;
-    public javax.swing.JTable tblCliente;
+    public javax.swing.JTable tblFactura;
     public javax.swing.JTextField txtCantidad;
     public javax.swing.JTextField txtCedulaCliente;
     public javax.swing.JTextField txtDetalle;
+    public javax.swing.JTextField txtFecha;
     public javax.swing.JTextField txtFormadePago;
     public javax.swing.JTextField txtIdEmpleado;
-    public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtTotalaPagar;
     // End of variables declaration//GEN-END:variables
 }
