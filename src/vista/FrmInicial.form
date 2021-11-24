@@ -28,16 +28,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="btnBienvenida" max="32767" attributes="0"/>
-                      <Component id="btnEmpleado" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnFactura" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="btnCliente" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnEmpleado" pref="151" max="32767" attributes="0"/>
+                  <Component id="btnFactura" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnBienvenida" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
-              <Component id="lblImagen" min="-2" pref="358" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="lblImagen" min="-2" pref="345" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -58,7 +56,7 @@
                       <Component id="btnEmpleado" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
