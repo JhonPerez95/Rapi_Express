@@ -69,7 +69,7 @@ public class CtrFactura implements ActionListener {
 
             if (validarFormulario()) {
                 if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
-                    
+
                     factura.setId_factura(Integer.parseInt(frmFactura.txtId.getText()));
                     factura.setCantidad(Integer.parseInt(txtCantidad));
                     factura.setDetalle(frmFactura.txtDetalle.getText());
@@ -144,6 +144,7 @@ public class CtrFactura implements ActionListener {
         frmFactura.txtFormadePago.setText(null);
         frmFactura.txtIdEmpleado.setText(null);
         frmFactura.txtId.setText(null);
+        frmFactura.txtTotalaPagar.setText(null);
     }
 
     public void llenarTabla() {
@@ -169,10 +170,7 @@ public class CtrFactura implements ActionListener {
     }
 
     public boolean validarFormulario() {
-        if (frmFactura.txtFecha.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "El campo Fecha es obligatorio! ");
-            return false;
-        }
+
         if (frmFactura.txtCantidad.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(null, "El campo Cantidad es obligatorio! ");
             return false;
