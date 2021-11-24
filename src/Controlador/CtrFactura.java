@@ -2,9 +2,15 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+
 import modelo.ConsultaFactura;
 import modelo.Factura;
+
 import vista.FrmFactura;
 
 public class CtrFactura implements ActionListener {
@@ -30,13 +36,57 @@ public class CtrFactura implements ActionListener {
 
         // BOTON AGREGAR
         if (e.getSource() == frmFactura.btnAgregar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton Agregar");
 
+            String txtCantidad = frmFactura.txtCantidad.getText().trim();
+            String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            if (validarFormulario()) {
+                if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
+
+                    factura.setCantidad(Integer.parseInt(txtCantidad));
+                    factura.setDetalle(frmFactura.txtDetalle.getText());
+                    factura.setForma_pago(frmFactura.txtFormadePago.getText());
+                    factura.setTotal_pagar(Integer.parseInt(frmFactura.txtTotalaPagar.getText()));
+                    factura.setCedula_cliente(Integer.parseInt(frmFactura.txtCedulaCliente.getText()));
+                    factura.setId_empleado(Integer.parseInt(frmFactura.txtIdEmpleado.getText()));
+
+                    if (consFactura.guardar(factura)) {
+                        limpiarTxt();
+                        JOptionPane.showMessageDialog(null, "Registro Guardado");
+                        llenarTabla();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al  guardar");
+                    }
+                }
+            }
         }
 
         // BOTON ACTUALIZAR
         if (e.getSource() == frmFactura.btnModificar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton actualizar");
+            String txtCantidad = frmFactura.txtCantidad.getText().trim();
+            String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
+
+            if (validarFormulario()) {
+                if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
+                    
+                    factura.setId_factura(Integer.parseInt(frmFactura.txtId.getText()));
+                    factura.setCantidad(Integer.parseInt(txtCantidad));
+                    factura.setDetalle(frmFactura.txtDetalle.getText());
+                    factura.setForma_pago(frmFactura.txtFormadePago.getText());
+                    factura.setTotal_pagar(Integer.parseInt(frmFactura.txtTotalaPagar.getText()));
+                    factura.setCedula_cliente(Integer.parseInt(frmFactura.txtCedulaCliente.getText()));
+                    factura.setId_empleado(Integer.parseInt(frmFactura.txtIdEmpleado.getText()));
+
+                    if (consFactura.modificar(factura)) {
+                        limpiarTxt();
+                        JOptionPane.showMessageDialog(null, "Registro modificado exitosamente");
+                        llenarTabla();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al  modificar");
+                    }
+                }
+            }
         }
 
         // BOTON CONSULTAR
@@ -51,7 +101,17 @@ public class CtrFactura implements ActionListener {
 
         // BOTON ELIMINAR
         if (e.getSource() == frmFactura.btnEliminar) {
-            JOptionPane.showMessageDialog(null, "Se oprimio el boton Eliminar");
+
+            String txtId = frmFactura.txtId.getText().trim();
+            factura.setId_factura(Integer.parseInt(txtId));
+            if (consFactura.eliminar(factura)) {
+                limpiarTxt();
+                JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
+                llenarTabla();
+            } else {
+                limpiarTxt();
+                JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
+            }
         }
     }
 
@@ -125,7 +185,7 @@ public class CtrFactura implements ActionListener {
             JOptionPane.showMessageDialog(null, "El campo Forma de pago es obligatorio! ");
             return false;
         }
-        
+
         if (frmFactura.txtTotalaPagar.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(null, "El campo total a pagar es obligatorio! ");
             return false;
