@@ -323,9 +323,9 @@ public class FrmFactura extends javax.swing.JFrame {
         txtCantidad.setText(String.valueOf(tblFactura.getValueAt(seleccion, 2)));
         txtDetalle.setText(String.valueOf(tblFactura.getValueAt(seleccion, 3)));
 //        txtFormadePago.setText(String.valueOf(tblFactura.getValueAt(seleccion, 4)));
-        txtTotalaPagar.setText(String.valueOf(tblFactura.getValueAt(seleccion, 4)));
-        txtCedulaCliente.setText(String.valueOf(tblFactura.getValueAt(seleccion, 5)));
-        txtIdEmpleado.setText(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
+        txtTotalaPagar.setText(String.valueOf(tblFactura.getValueAt(seleccion, 5)));
+        txtCedulaCliente.setText(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
+        txtIdEmpleado.setText(String.valueOf(tblFactura.getValueAt(seleccion, 7)));
     }//GEN-LAST:event_tblFacturaMouseClicked
 
     /**
