@@ -35,13 +35,14 @@ public class CtrFactura implements ActionListener {
 
             String txtCantidad = frmFactura.txtCantidad.getText().trim();
             String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
+            String formaPago = frmFactura.cbxFormaPago.getSelectedItem().toString();
 
             if (validarFormulario()) {
                 if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
 
                     factura.setCantidad(Integer.parseInt(txtCantidad));
                     factura.setDetalle(frmFactura.txtDetalle.getText());
-                    factura.setForma_pago(frmFactura.txtFormadePago.getText());
+                    factura.setForma_pago(formaPago);
                     factura.setTotal_pagar(Integer.parseInt(frmFactura.txtTotalaPagar.getText()));
                     factura.setCedula_cliente(Integer.parseInt(frmFactura.txtCedulaCliente.getText()));
                     factura.setId_empleado(Integer.parseInt(frmFactura.txtIdEmpleado.getText()));
@@ -61,6 +62,7 @@ public class CtrFactura implements ActionListener {
         if (e.getSource() == frmFactura.btnModificar) {
             String txtCantidad = frmFactura.txtCantidad.getText().trim();
             String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
+            String formaPago = frmFactura.cbxFormaPago.getSelectedItem().toString();
 
             if (validarFormulario()) {
                 if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
@@ -68,7 +70,7 @@ public class CtrFactura implements ActionListener {
                     factura.setId_factura(Integer.parseInt(frmFactura.txtId.getText()));
                     factura.setCantidad(Integer.parseInt(txtCantidad));
                     factura.setDetalle(frmFactura.txtDetalle.getText());
-                    factura.setForma_pago(frmFactura.txtFormadePago.getText());
+                    factura.setForma_pago(formaPago);
                     factura.setTotal_pagar(Integer.parseInt(frmFactura.txtTotalaPagar.getText()));
                     factura.setCedula_cliente(Integer.parseInt(frmFactura.txtCedulaCliente.getText()));
                     factura.setId_empleado(Integer.parseInt(frmFactura.txtIdEmpleado.getText()));
@@ -136,7 +138,6 @@ public class CtrFactura implements ActionListener {
         frmFactura.txtDetalle.setText(null);
         frmFactura.txtFecha.setText(null);
         frmFactura.txtId.setText(null);
-        frmFactura.txtFormadePago.setText(null);
         frmFactura.txtIdEmpleado.setText(null);
         frmFactura.txtId.setText(null);
         frmFactura.txtTotalaPagar.setText(null);
@@ -174,13 +175,16 @@ public class CtrFactura implements ActionListener {
             JOptionPane.showMessageDialog(null, "El campo Detalle es obligatorio! ");
             return false;
         }
-        if (frmFactura.txtFormadePago.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "El campo Forma de pago es obligatorio! ");
-            return false;
-        }
-
         if (frmFactura.txtTotalaPagar.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(null, "El campo total a pagar es obligatorio! ");
+            return false;
+        }
+          if (frmFactura.txtCedulaCliente.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo cedula del cliente  es obligatorio! ");
+            return false;
+        }
+            if (frmFactura.txtIdEmpleado.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo Id del empleado  es obligatorio! ");
             return false;
         }
 
