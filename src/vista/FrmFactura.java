@@ -32,6 +32,8 @@ public class FrmFactura extends javax.swing.JFrame {
 
         cbxClientes.setModel(modeloClientes);
         cbxEmpleado.setModel(modeloEmpleado);
+        
+     
 
     }
 
@@ -175,6 +177,8 @@ public class FrmFactura extends javax.swing.JFrame {
         cbxFormaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tajeta Debito", "Tarjeta Credito" }));
 
         cbxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxClientes.setToolTipText("");
+        cbxClientes.setName(""); // NOI18N
 
         cbxEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -284,6 +288,8 @@ public class FrmFactura extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        cbxClientes.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -322,8 +328,10 @@ public class FrmFactura extends javax.swing.JFrame {
         txtDetalle.setText(String.valueOf(tblFactura.getValueAt(seleccion, 3)));
 //        txtFormadePago.setText(String.valueOf(tblFactura.getValueAt(seleccion, 4)));
         txtTotalaPagar.setText(String.valueOf(tblFactura.getValueAt(seleccion, 5)));
+        int indexCliente = Integer.parseInt(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
 //        txtCedulaCliente.setText(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
 //        txtIdEmpleado.setText(String.valueOf(tblFactura.getValueAt(seleccion, 7)));
+
     }//GEN-LAST:event_tblFacturaMouseClicked
 
     /**
