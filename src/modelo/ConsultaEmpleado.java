@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.FrmEmpleado;
@@ -92,10 +93,10 @@ public class ConsultaEmpleado extends Conexion {
         Connection con = getConnection();
         ResultSet respuesta = null;
         String sql = "SELECT * FROM empleado WHERE cedula=?";
-        
+
         // Resetear datos tabla
         model.setRowCount(0);
-        
+
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, empleado.getCedula());
@@ -117,10 +118,10 @@ public class ConsultaEmpleado extends Conexion {
     public boolean traerEmpleados() {
         PreparedStatement ps = null;
         String sql = "SELECT * FROM empleado";
-        
+
         // Resetear datos tabla
         model.setRowCount(0);
-        
+
         try {
             ResultSet respuesta = consultarRegistros(sql);
             while (respuesta.next()) {
@@ -133,5 +134,29 @@ public class ConsultaEmpleado extends Conexion {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    public Vector<Empleado> mostrarEmpleadoCbx() {
+        PreparedStatement ps = null;
+        String sql = "SELECT id_empleado, nombre, apellido FROM empleado";
+
+        Vector<Empleado> datosEmpleado = new Vector<Empleado>();
+        Empleado datos = null;
+
+        try {
+            ResultSet respuesta = consultarRegistros(sql);
+
+            while (respuesta.next()) {
+                String nombreCompleto = respuesta.getString("nombre") + " " + respuesta.getString("apellido");
+
+                datos = new Empleado();
+                datos.setId_empleado(Integer.parseInt(respuesta.getString("id_empleado")));
+                datos.setNombre(nombreCompleto);
+                datosEmpleado.add(datos);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return datosEmpleado;
     }
 }

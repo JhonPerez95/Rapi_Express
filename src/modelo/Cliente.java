@@ -57,4 +57,8 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    public String toString() {
+        return this.nombre;
+
+    } 
 }

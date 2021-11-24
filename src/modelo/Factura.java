@@ -76,4 +76,6 @@ public class Factura {
     public void setCedula_cliente(int cedula_cliente) {
         this.cedula_cliente = cedula_cliente;
     }
+    
+
 }

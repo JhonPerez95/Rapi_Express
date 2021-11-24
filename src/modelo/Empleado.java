@@ -56,4 +56,9 @@ public class Empleado {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public String toString() {
+        return this.nombre;
+
+    }
 }

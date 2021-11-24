@@ -3,6 +3,8 @@ package Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
+import modelo.Empleado;
 
 import modelo.ConsultaFactura;
 import modelo.Factura;
@@ -36,6 +38,8 @@ public class CtrFactura implements ActionListener {
             String txtCantidad = frmFactura.txtCantidad.getText().trim();
             String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
             String formaPago = frmFactura.cbxFormaPago.getSelectedItem().toString();
+            Cliente txtCliente = (Cliente) frmFactura.cbxClientes.getSelectedItem();
+            Empleado txtEmpleado = (Empleado) frmFactura.cbxEmpleado.getSelectedItem();
 
             if (validarFormulario()) {
                 if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
@@ -44,8 +48,8 @@ public class CtrFactura implements ActionListener {
                     factura.setDetalle(frmFactura.txtDetalle.getText());
                     factura.setForma_pago(formaPago);
                     factura.setTotal_pagar(Integer.parseInt(frmFactura.txtTotalaPagar.getText()));
-                    factura.setCedula_cliente(Integer.parseInt(frmFactura.txtCedulaCliente.getText()));
-                    factura.setId_empleado(Integer.parseInt(frmFactura.txtIdEmpleado.getText()));
+                    factura.setCedula_cliente(txtCliente.getCedula_cliente());
+                    factura.setId_empleado(txtEmpleado.getId_empleado());
 
                     if (consFactura.guardar(factura)) {
                         limpiarTxt();
@@ -63,6 +67,8 @@ public class CtrFactura implements ActionListener {
             String txtCantidad = frmFactura.txtCantidad.getText().trim();
             String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
             String formaPago = frmFactura.cbxFormaPago.getSelectedItem().toString();
+            Cliente txtCliente = (Cliente) frmFactura.cbxClientes.getSelectedItem();
+            Empleado txtEmpleado = (Empleado) frmFactura.cbxEmpleado.getSelectedItem();
 
             if (validarFormulario()) {
                 if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
@@ -72,8 +78,8 @@ public class CtrFactura implements ActionListener {
                     factura.setDetalle(frmFactura.txtDetalle.getText());
                     factura.setForma_pago(formaPago);
                     factura.setTotal_pagar(Integer.parseInt(frmFactura.txtTotalaPagar.getText()));
-                    factura.setCedula_cliente(Integer.parseInt(frmFactura.txtCedulaCliente.getText()));
-                    factura.setId_empleado(Integer.parseInt(frmFactura.txtIdEmpleado.getText()));
+                    factura.setCedula_cliente(txtCliente.getCedula_cliente());
+                    factura.setId_empleado(txtEmpleado.getId_empleado());
 
                     if (consFactura.modificar(factura)) {
                         limpiarTxt();
@@ -134,11 +140,9 @@ public class CtrFactura implements ActionListener {
 
     public void limpiarTxt() {
         frmFactura.txtCantidad.setText(null);
-        frmFactura.txtCedulaCliente.setText(null);
         frmFactura.txtDetalle.setText(null);
         frmFactura.txtFecha.setText(null);
         frmFactura.txtId.setText(null);
-        frmFactura.txtIdEmpleado.setText(null);
         frmFactura.txtId.setText(null);
         frmFactura.txtTotalaPagar.setText(null);
     }
@@ -179,15 +183,6 @@ public class CtrFactura implements ActionListener {
             JOptionPane.showMessageDialog(null, "El campo total a pagar es obligatorio! ");
             return false;
         }
-          if (frmFactura.txtCedulaCliente.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "El campo cedula del cliente  es obligatorio! ");
-            return false;
-        }
-            if (frmFactura.txtIdEmpleado.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "El campo Id del empleado  es obligatorio! ");
-            return false;
-        }
-
         return true;
     }
 }

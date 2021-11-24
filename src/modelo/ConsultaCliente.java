@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.FrmCliente;
@@ -107,13 +108,6 @@ public class ConsultaCliente extends Conexion {
             respuesta = ps.executeQuery();
 
             if (respuesta.next()) {
-//                client.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
-//                client.setNombre(respuesta.getString("nombre"));
-//                client.setApellido(respuesta.getString("apellido"));
-//                client.setCorreo(respuesta.getString("correo"));
-//                client.setTelefono(respuesta.getString("telefono"));
-//                client.setDireccion(respuesta.getString("direccion"));
-//                
 
                 Object[] objCliente = {Integer.parseInt(respuesta.getString("cedula_cliente")), respuesta.getString("nombre"), respuesta.getString("apellido"),
                     respuesta.getString("correo"), respuesta.getString("telefono"), respuesta.getString("direccion")};
@@ -148,4 +142,29 @@ public class ConsultaCliente extends Conexion {
             return false;
         }
     }
+
+    public Vector<Cliente> mostrarClientesCbx() {
+        PreparedStatement ps = null;
+        String sql = "SELECT cedula_cliente, nombre, apellido FROM cliente";
+
+        Vector<Cliente> datosCliente = new Vector<Cliente>();
+        Cliente datos = null;
+
+        try {
+            ResultSet respuesta = consultarRegistros(sql);
+
+            while (respuesta.next()) {
+                String nombreCompleto = respuesta.getString("nombre")+" "+ respuesta.getString("apellido");
+         
+                datos = new Cliente();
+                datos.setCedula_cliente(Integer.parseInt(respuesta.getString("cedula_cliente")));
+                datos.setNombre(nombreCompleto);
+                datosCliente.add(datos);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return datosCliente;
+    }
+
 }

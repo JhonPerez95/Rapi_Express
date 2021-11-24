@@ -5,6 +5,10 @@
  */
 package vista;
 
+import javax.swing.DefaultComboBoxModel;
+import modelo.ConsultaCliente;
+import modelo.ConsultaEmpleado;
+
 /**
  *
  * @author Usuario
@@ -16,6 +20,19 @@ public class FrmFactura extends javax.swing.JFrame {
      */
     public FrmFactura() {
         initComponents();
+
+        FrmCliente frmCliente = new FrmCliente();
+        FrmEmpleado frmEmpleado = new FrmEmpleado();
+
+        ConsultaCliente consCliente = new ConsultaCliente(frmCliente);
+        ConsultaEmpleado consEmpleado = new ConsultaEmpleado(frmEmpleado);
+
+        DefaultComboBoxModel modeloClientes = new DefaultComboBoxModel(consCliente.mostrarClientesCbx());
+        DefaultComboBoxModel modeloEmpleado = new DefaultComboBoxModel(consEmpleado.mostrarEmpleadoCbx());
+
+        cbxClientes.setModel(modeloClientes);
+        cbxEmpleado.setModel(modeloEmpleado);
+
     }
 
     /**
@@ -38,8 +55,6 @@ public class FrmFactura extends javax.swing.JFrame {
         txtCantidad = new javax.swing.JTextField();
         txtDetalle = new javax.swing.JTextField();
         txtTotalaPagar = new javax.swing.JTextField();
-        txtCedulaCliente = new javax.swing.JTextField();
-        txtIdEmpleado = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -50,6 +65,8 @@ public class FrmFactura extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         cbxFormaPago = new javax.swing.JComboBox<>();
+        cbxClientes = new javax.swing.JComboBox<>();
+        cbxEmpleado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,18 +107,6 @@ public class FrmFactura extends javax.swing.JFrame {
         txtTotalaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalaPagarActionPerformed(evt);
-            }
-        });
-
-        txtCedulaCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedulaClienteActionPerformed(evt);
-            }
-        });
-
-        txtIdEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdEmpleadoActionPerformed(evt);
             }
         });
 
@@ -169,6 +174,10 @@ public class FrmFactura extends javax.swing.JFrame {
 
         cbxFormaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tajeta Debito", "Tarjeta Credito" }));
 
+        cbxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbxEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,7 +193,7 @@ public class FrmFactura extends javax.swing.JFrame {
                         .addComponent(btnModificar)
                         .addGap(121, 121, 121)
                         .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                         .addComponent(btnCancelar)
                         .addGap(61, 61, 61))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -217,15 +226,11 @@ public class FrmFactura extends javax.swing.JFrame {
                             .addComponent(lblNombre6, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                             .addComponent(lblNombre4, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                             .addComponent(lblNombre5, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTotalaPagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCedulaCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTotalaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                            .addComponent(cbxEmpleado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(78, 78, 78))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -251,27 +256,29 @@ public class FrmFactura extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbxEmpleado)
+                    .addComponent(lblNombre6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnAgregar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnConsultar)
+                            .addComponent(btnModificar)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnCancelar)
+                            .addComponent(btnAgregar))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                 .addContainerGap())
@@ -296,14 +303,6 @@ public class FrmFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalaPagarActionPerformed
 
-    private void txtCedulaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaClienteActionPerformed
-
-    private void txtIdEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdEmpleadoActionPerformed
-
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarActionPerformed
@@ -315,8 +314,7 @@ public class FrmFactura extends javax.swing.JFrame {
     private void tblFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFacturaMouseClicked
         // Evento para seleccionar en tabla de factura
         int seleccion = tblFactura.rowAtPoint(evt.getPoint());
-        
-        
+
         txtId.setText(String.valueOf(tblFactura.getValueAt(seleccion, 0)));
 
         txtFecha.setText(String.valueOf(tblFactura.getValueAt(seleccion, 1)));
@@ -324,8 +322,8 @@ public class FrmFactura extends javax.swing.JFrame {
         txtDetalle.setText(String.valueOf(tblFactura.getValueAt(seleccion, 3)));
 //        txtFormadePago.setText(String.valueOf(tblFactura.getValueAt(seleccion, 4)));
         txtTotalaPagar.setText(String.valueOf(tblFactura.getValueAt(seleccion, 5)));
-        txtCedulaCliente.setText(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
-        txtIdEmpleado.setText(String.valueOf(tblFactura.getValueAt(seleccion, 7)));
+//        txtCedulaCliente.setText(String.valueOf(tblFactura.getValueAt(seleccion, 6)));
+//        txtIdEmpleado.setText(String.valueOf(tblFactura.getValueAt(seleccion, 7)));
     }//GEN-LAST:event_tblFacturaMouseClicked
 
     /**
@@ -370,6 +368,8 @@ public class FrmFactura extends javax.swing.JFrame {
     public javax.swing.JButton btnConsultar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnModificar;
+    public javax.swing.JComboBox<String> cbxClientes;
+    public javax.swing.JComboBox<String> cbxEmpleado;
     public javax.swing.JComboBox<String> cbxFormaPago;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JLabel lblFecha;
@@ -382,11 +382,9 @@ public class FrmFactura extends javax.swing.JFrame {
     public javax.swing.JLabel lblNombre6;
     public javax.swing.JTable tblFactura;
     public javax.swing.JTextField txtCantidad;
-    public javax.swing.JTextField txtCedulaCliente;
     public javax.swing.JTextField txtDetalle;
     public javax.swing.JTextField txtFecha;
     public javax.swing.JTextField txtId;
-    public javax.swing.JTextField txtIdEmpleado;
     public javax.swing.JTextField txtTotalaPagar;
     // End of variables declaration//GEN-END:variables
 }
