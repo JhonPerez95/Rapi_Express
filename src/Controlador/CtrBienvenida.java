@@ -12,7 +12,6 @@ public class CtrBienvenida implements ActionListener{
     public CtrBienvenida(FrmBienvenida frmBienvenida) {
         this.frmBienvenida = frmBienvenida;
         this.frmBienvenida.btnCancelar.addActionListener(this);
-
     }
 
     
