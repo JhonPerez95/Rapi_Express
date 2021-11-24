@@ -2,10 +2,6 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 import modelo.ConsultaFactura;
@@ -39,7 +35,6 @@ public class CtrFactura implements ActionListener {
 
             String txtCantidad = frmFactura.txtCantidad.getText().trim();
             String txtTotalaPagar = frmFactura.txtTotalaPagar.getText().trim();
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
             if (validarFormulario()) {
                 if (isNumerico(txtCantidad, "Cantidad") && isNumerico(txtTotalaPagar, "Total Pagar")) {
