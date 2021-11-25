@@ -14,11 +14,13 @@ public class Conexion {
 
     String driver = "com.mysql.jdbc.Driver";
     String user = "root";
-    String pass = "root12345";    
-    //String pass = "root12345";
-
-    String nameDb = "bdcaferapiexpress";  
-    //String nameDb = "bdcaferapiexpress";
+    //clave perez
+   // String pass = "root12345";  
+    // clave villanueva
+    String pass = "";
+// BD perez
+    //String nameDb = "bdcaferapiexpress";  
+    String nameDb = "rapiexpress";
     String url = "jdbc:mysql://localhost:3306/" + nameDb + "?useUnicode=true&use"
             + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
             + "serverTimezone=UTC";
@@ -28,8 +30,8 @@ public class Conexion {
 
     public Conexion() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             //Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
 
             conn = DriverManager.getConnection(url, user, pass);
             if (conn != null) {
