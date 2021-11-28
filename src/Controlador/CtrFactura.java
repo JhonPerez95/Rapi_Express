@@ -104,16 +104,19 @@ public class CtrFactura implements ActionListener {
 
         // BOTON ELIMINAR
         if (e.getSource() == frmFactura.btnEliminar) {
+            int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar?");
 
             String txtId = frmFactura.txtId.getText().trim();
             factura.setId_factura(Integer.parseInt(txtId));
-            if (consFactura.eliminar(factura)) {
-                limpiarTxt();
-                JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
-                llenarTabla();
-            } else {
-                limpiarTxt();
-                JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
+            if (resp == 0) {
+                if (consFactura.eliminar(factura)) {
+                    limpiarTxt();
+                    JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
+                    llenarTabla();
+                } else {
+                    limpiarTxt();
+                    JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
+                }
             }
         }
     }

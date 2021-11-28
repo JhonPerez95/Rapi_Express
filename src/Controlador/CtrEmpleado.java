@@ -34,7 +34,7 @@ public class CtrEmpleado implements ActionListener {
             String txtCedula = frmEmpleado.txtCedula.getText().trim();
             String txtSalario = frmEmpleado.txtSalario.getText().trim();
             String rol = frmEmpleado.cbxRol.getSelectedItem().toString();
-            
+
             if (validarFormulario()) {
                 if (isNumerico(txtCedula, "Cedula") && isNumerico(txtSalario, "Salario")) {
                     empleado.setCedula(Integer.parseInt(txtCedula));
@@ -53,7 +53,7 @@ public class CtrEmpleado implements ActionListener {
                 }
             }
         }
- 
+
         // BOTON ACTUALIZAR
         if (e.getSource() == frmEmpleado.btnModificar) {
             String txtCedula = frmEmpleado.txtCedula.getText().trim();
@@ -93,15 +93,18 @@ public class CtrEmpleado implements ActionListener {
         // BOTON ELIMINAR
         if (e.getSource() == frmEmpleado.btnEliminar) {
             String txtId = frmEmpleado.txtId.getText().trim();
+            int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar?");
 
             empleado.setId_empleado(Integer.parseInt(txtId));
-            if (consEmpleado.eliminar(empleado)) {
-                limpiarTxt();
-                JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
-                llenarTabla();
-            } else {
-                limpiarTxt();
-                JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
+            if (resp == 0) {
+                if (consEmpleado.eliminar(empleado)) {
+                    limpiarTxt();
+                    JOptionPane.showMessageDialog(null, "Registro fue eliminado exitosamente !");
+                    llenarTabla();
+                } else {
+                    limpiarTxt();
+                    JOptionPane.showMessageDialog(null, "Error al  eliminar, comunicarse con el administrador !");
+                }
             }
         }
     }
